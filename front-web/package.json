@@ -1,0 +1,13 @@
+{
+  "name": "view-euh",
+  "version": "1.0.0",
+  "description": "test p5js front",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -c-1 -p 8081"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
