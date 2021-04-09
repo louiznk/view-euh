@@ -30,6 +30,7 @@ let meuhh =
 // Teachable Machine model URL:
 let soundModelURL = window.location.protocol + '//' + window.location.host + '/model/model.json'
 
+let needRePaint = true
 
 function preload() {
     // Load the model
@@ -44,7 +45,12 @@ function setup() {
     fill('#FF00E8')
     textSize(32)
 
-    textFont('DejaVu Sans Mono');
+    //textFont('DejaVu Sans Mono');
+    //textFont('BlexMono Nerd Font Mono');
+    //textFont('FiraCode Nerd Font Mono');
+    textFont('Fira Mono');
+    textStyle(BOLD);
+
     textAlign(LEFT, BOTTOM)
     
     // Start classifying
@@ -53,11 +59,14 @@ function setup() {
 }
 
 function draw() {
-    background(0, 255, 0)
-    if (label == "euhh") {
-        euuh()
-    } else {
-        hide()
+    if (needRePaint) {
+        needRePaint = false
+        background(0, 255, 0)
+        if (label == "euhh") {
+            euuh()
+        } else {
+            hide()
+        }
     }
 
 }
@@ -83,8 +92,11 @@ function gotResult(error, results) {
     }
     // The results are in an array ordered by confidence.
     // console.log(results[0])
-    if (results[0].confidence > 0.7) {      
-        label = results[0].label        
+    if (results[0].confidence > 0.7) {  
+        if (label != results[0].label) {
+            label = results[0].label
+            needRePaint = true        
+        }
     }
     //  else
     //    label = "unknow"
